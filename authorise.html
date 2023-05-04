@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+    <base target="_top">
+    <script src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
+    <script>
+      // Prevent forms from submitting.
+      function preventFormSubmit() {
+        var forms = document.querySelectorAll('form');
+        for (var i = 0; i < forms.length; i++) {
+          forms[i].addEventListener('submit', function(event) {
+            event.preventDefault();
+          });
+        }
+      }
+      window.addEventListener('load', preventFormSubmit);
+
+      function handleFormSubmit(formObject) {
+        google.script.run
+        .withSuccessHandler(showSuccess)
+        .withFailureHandler(showFailed).do_authorise(formObject);
+      }
+      function showSuccess(url) {
+        var div = document.getElementById('output');
+        div.innerHTML = '<p>Success</p>';
+      }
+      function showFailed(msg) {
+        var div = document.getElementById('output');
+        div.innerHTML = '<p>Failed! ' + msg + '</p>';
+      }
+    </script>
+  </head>
+  <body>
+    <form id="myForm" onsubmit="handleFormSubmit(this)">
+    <div class="form-group">
+      <label for="client_id">Client ID</label>
+      <input type="password" name="client_id" id="client_id" style="width: 150px;">
+    </div>
+    <div class="form-group">
+      <label for="client_secret">Client Secret</label>
+      <input type="password" name="client_secret" id="client_secret" style="width: 150px;">
+    </div>
+      <input type="submit" value="Submit" />
+    </form>
+    <div id="output"></div>
+ </body>
+</html>
+
