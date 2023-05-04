@@ -3,7 +3,6 @@ function logout() {
   service.reset();
 }
 
-
 /**
  * Configures the service.
  */
