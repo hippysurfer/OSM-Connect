@@ -7,6 +7,23 @@
 
   Repo: https://github.com/hippysurfer/OSM-Connect
 
+  Use:
+
+    I publish this as a Document Add On within the private Google Apps service that we have for our
+    group.
+
+    You can copy/past the code into a standalone Google Sheet and it should work ok.
+
+    Once enabled, you will see a new menu 'Extensions -> OSM Connect' -> 'Authorize'.
+    This will prompt for a Client ID and Client Secret. See the OSM instructions under 
+    "Settings -> My Account Details -> Developer Tools" for instructions on generating these. 
+    (NOTE: you will want to record these somewhere safe as you can reuse the same ones in multiple
+    sheets.)
+
+    What a moment for 'Success' to be displayed (it can take 10 secs or so). Then close the popup.
+
+    Now you should see a more complete menu under: 'Extensions -> OSM Connect'.
+
   Structure:
 
     OSM.gs - The core library for accessing OSM. (This should probably be a library)
