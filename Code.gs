@@ -1,36 +1,52 @@
 /*
+  OSM Add On for Google Sheets
+
+  Author: Richard Taylor (7th Lichfield Scout Group)
+
+  License: GPL3
+
+  Repo: https://github.com/hippysurfer/OSM-Connect
+
+  Structure:
+
+    OSM.gs - The core library for accessing OSM. (This should probably be a library)
+    Oauth2.gs - Provides the authentication service.
+
+    Most of the rest of the files are about providing a interface to Sheets to select sections
+    and insert information into the sheets. (There is some stuff in here that is specific to my group
+    you will need to tailor it accordingly.)
+
+  TODO:
+
+    Loads! :-)
+
+    The subs download is hardcoded to my group :-( It needs the same section selection interface as
+    the other resources.
+
+    The flexi records are hardcoded to my group's 'Moving On' table. A more generalised approach is needed.
+
+    I am certain the whole thing can be much better structured. (Pull requests welcome!)
+
+  NOTE: If you use this by copy/pasting directly into a Google Sheet you will need to add the following
+        2 libraries:
+        
+        OAuth2 - 1B7FSrk5Zi6L1rSxxTDgDEUsPzlukDsi4KGuTMorsTQHhGBzBkMun4iDF
+        cUseful - 1EbLSESpiGkI3PYmJqWh3-rmLkYKAtCNPi1L2YCtMgo2Ut8xMThfJ41Ex
 
 */
 
-var DEBUG = true;
+var DEBUG = false;
 
-var DEV_MODE = false;
-// var DEV_MODE = true;   // Set to true to use hardcoded OSM credentials for testing.
+var DEV_MODE = false;  // Set to true to use hardcoded OSM credentials for testing. (See Oauth2.gs)
+
 
 function exception(e) {
   // record an exception
   debug("EXCEPTION: " + e.name + " " + e.message + " " + e.exception + " " + e.lineNumber)
 }
 
-function api_error(url, options, error) {
-  Logger.log("API ERROR: url="+ url + " keys="+ options + " code=" + error["code"] + " message=" + error["message"]);
-}
-
 function debug(msg) {
   Logger.log("DEBUG: " + msg);
-}
-
-function sheet_log(message) {
-  try {
-    var ss = SpreadsheetApp.getActive();  
-    var log_sheet = ss.getSheetByName("Log");
-    var rowData = [];
-    rowData.push(new Date());
-    rowData.push(message);
-    log_sheet.appendRow(rowData);
-  } catch(e) {
-    Logger.log("SHEET_LOG: "+ message);
-  }
 }
 
 function onInstall(e) {
@@ -68,6 +84,7 @@ function onOpen(e) {
 }
 
 
+// Utility functions
 
 function search(nameKey,prop,  myArray){
     for (var i=0; i < myArray.length; i++) {

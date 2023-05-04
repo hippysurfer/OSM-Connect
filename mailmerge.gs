@@ -72,7 +72,6 @@ function member_data(fetch_members_func) {
       fetch_members_func().map(
         function (member) {
           var row = [];
-          sheet_log(member);
           // loop through the header columns
           for (i in headers) {
             if (headers[i] == "Timestamp") { // special case if you include a 'Timestamp' column
