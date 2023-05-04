@@ -684,9 +684,9 @@ class OSM_ {
   fetch_payments(sectionid, scheme) {
     var schedule = this.fetch(
       "ext/finances/onlinepayments/?action=getPaymentSchedule&sectionid=" + sectionid + "&schemeid=" +
-      scheme.schemeid + "&termid=" + active_term_id(sectionid));
+      scheme.schemeid + "&termid=" + this.active_term_id(sectionid));
     var status = this.fetch("ext/finances/onlinepayments/?action=getPaymentStatus&sectionid=" + sectionid + "&schemeid=" +
-      scheme.schemeid + "&termid=" + active_term_id(sectionid));
+      scheme.schemeid + "&termid=" + this.active_term_id(sectionid));
 
     // if (scheme.name === "Discounted Subscriptions for 7th Lichfield Scout Group") {
     //   // Fix up wrongly named payment schedule in the Group Subs
