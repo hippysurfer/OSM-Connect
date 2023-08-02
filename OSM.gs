@@ -158,7 +158,7 @@ class OSM_ {
   //
   /////////////////
 
-  fetch_roles(filter_no_term, filter_scope_access) {
+  fetch_roles(filter_no_term, filter_scope_access, filter_section_type) {
     var roles = this.fetch('api.php?action=getUserRoles');
 
     var osm = this;
@@ -180,6 +180,14 @@ class OSM_ {
         });
     }
 
+    // Filter to return only the requested section type
+    if (filter_section_type !== undefined)  {
+      roles = roles.filter(
+        function (elem) { 
+          return (elem.section === filter_section_type);
+        })
+    }
+
     // Sort the sections in a natural order to help with UI display.
     var sorted_roles = [].concat(
       roles.filter(function (elem) { return (elem.section === "earlyyears") }),
@@ -194,6 +202,7 @@ class OSM_ {
           (elem.section != "scouts"))
       })
     );
+
     return sorted_roles;
   };
 
@@ -297,7 +306,7 @@ class OSM_ {
   active_term_id(section_id) {
     var active = this.active_term(section_id);
     if (active === undefined) {
-      return;
+      return -1;
     }
     return active.termid;
   };

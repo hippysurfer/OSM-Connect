@@ -91,6 +91,7 @@ function onOpen(e) {
       menu.addItem("Fetch Registers ...", "show_fetch_registers_dialog");
       menu.addItem("Fetch Payments ...", "action_payments");
       menu.addItem("Fetch MailMerge ...", "show_fetch_mailmerge_dialog");
+      menu.addItem("Fetch Waiting Lists ...", "show_fetch_waitinglists_dialog");
       menu.addSeparator();
       menu.addItem("De-authorise", "remove_creds");      
     }
