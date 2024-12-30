@@ -27,6 +27,7 @@
     $('#dialog-fetch-event-execute-button').click(onExecuteFetchEventClick);
     $('#dialog-fetch-registers-execute-button').click(onExecuteFetchRegistersClick);
     $('#dialog-waiting-list-execute-button').click(onWaitingListExecuteClick);
+    $('#dialog-fetch-awards-execute-button').click(onAwardsExecuteClick);
     // Call the server here to retrieve any information needed to build
     // the dialog, if necessary.
   });
@@ -170,6 +171,28 @@
           })
         .withUserObject(this)
         .action_fetch_registers(action);
+  }
+   function onAwardsExecuteClick() {
+    this.disabled = true;
+    // Gather any information that needs to be sent to the server here.
+    var action = $('#dialog-action-select').val();
+    showStatus('Working...');
+    // Send the value to the server and handle the response.
+    google.script.run
+        .withSuccessHandler(
+          function(msg, element) {
+            // Respond to success conditions here.
+            showStatus('Execution successful.');
+            element.disabled = false;
+          })
+        .withFailureHandler(
+          function(msg, element) {
+            // Respond to failure conditions here.
+            showStatus('Execution failed: ' + msg, 'error');
+            element.disabled = false;
+          })
+        .withUserObject(this)
+        .action_fetch_awards(action);
   }
   /**
    * Displays the given status message in the dialog.

@@ -10,8 +10,8 @@ function getOSMService() {
   // Google Sheets OSM App creds
   if (DEV_MODE) {
     // Add creds here for debugging. NEVER publish with creds here!
-    var client_id = 'XXXXXXXXXXXXXX';
-    var client_secret = 'XXXXXXXXXXXXXX';
+    var client_id = 'C9OwnG8czhiLUVUuIBCyim8mulsS8SWU';
+    var client_secret = 'a0WAF80ciWyjzCl4ktDcBjJerNEzmdGxayvQBmI0YB7RiUUHCnGCYtlaxPLm505c';
   } else {
     var client_id = fetch_userid();
     var client_secret = fetch_secret();
@@ -38,7 +38,7 @@ function getOSMService() {
       .setLock(LockService.getUserLock())
 
       // Set the scopes to request (space-separated for Google services).
-      .setScope('section:attendance:read section:event:read section:flexirecord:read section:member:read section:finance:read');
+      .setScope('section:attendance:read section:event:read section:flexirecord:read section:member:read section:finance:read section:badge:read');
       //.setScope('section:member:read');
       // .setScope('section:event:read');
 

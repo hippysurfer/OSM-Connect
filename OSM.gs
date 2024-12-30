@@ -749,5 +749,42 @@ class OSM_ {
     return merged;
   }
 
+  /////////////////
+  //
+  //  Awards
+  //
+  /////////////////
+
+  fetch_awards(section) {
+    const major_award_ids = new Map([
+      ['squirrels', '14771'],
+      ['beavers', '1529'],
+      ['cubs', '1587'],
+      ['scouts', '1539'],
+    ])
+    const major_award_names = new Map([
+      ['squirrels', 'Acorn'],
+      ['beavers', 'Bronze'],
+      ['cubs', 'Silver'],
+      ['scouts', 'Gold'],
+    ])
+    var result = this.fetch(
+      "ext/badges/records/?action=getBadgeRecords" + "&dateFormat=uk" + "&section="+ section.section + "&badge_id=" + major_award_ids.get(section.section) + "&badge_version=0",
+      section.sectionid,
+      this.active_term_id(section.sectionid));
+    var values = [];
+    for (var key in result.items) {
+      values.push(result.items[key]);
+    }
+    result = values.map(
+      function (elem) {
+        elem['section_name'] = section.sectionname;
+        elem['section_type'] = section.section;
+        elem['award_name'] = major_award_names.get(section.section);
+        return elem;
+      }
+    );
+    return result;
+  }
 }
 

@@ -50,11 +50,13 @@
         OAuth2 - 1B7FSrk5Zi6L1rSxxTDgDEUsPzlukDsi4KGuTMorsTQHhGBzBkMun4iDF
         cUseful - 1EbLSESpiGkI3PYmJqWh3-rmLkYKAtCNPi1L2YCtMgo2Ut8xMThfJ41Ex
 
+  DEPLOY: Do not forget to update the version number here:
+     https://console.cloud.google.com/apis/api/appsmarket-component.googleapis.com/googleapps_sdk?project=osm-connect
 */
 
 var DEBUG = false;
 
-var DEV_MODE = false;  // Set to true to use hardcoded OSM credentials for testing. (See Oauth2.gs)
+var DEV_MODE = true;  // Set to true to use hardcoded OSM credentials for testing. (See Oauth2.gs)
 
 
 function exception(e) {
@@ -92,6 +94,7 @@ function onOpen(e) {
       menu.addItem("Fetch Payments ...", "action_payments");
       menu.addItem("Fetch MailMerge ...", "show_fetch_mailmerge_dialog");
       menu.addItem("Fetch Waiting Lists ...", "show_fetch_waitinglists_dialog");
+      menu.addItem("Fetch Awards ...", "show_fetch_awards_dialog");
       menu.addSeparator();
       menu.addItem("De-authorise", "remove_creds");      
     }
